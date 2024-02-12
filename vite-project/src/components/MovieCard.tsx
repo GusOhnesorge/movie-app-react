@@ -1,7 +1,6 @@
 import MovieScore from "./MovieScore"
 
 type MovieCardProps = {
-  id: number,
   title: string,
   posterPath?: string,
   description?: string,
@@ -9,7 +8,7 @@ type MovieCardProps = {
   voteCount?: number,
 }
 
-export default function MovieCard({id, title, posterPath, description, score, voteCount}: MovieCardProps){
+export default function MovieCard({title, posterPath, description, score, voteCount}: MovieCardProps){
 
   return (
     <>

@@ -21,7 +21,7 @@ function App() {
 
   const movieResultCards = fullMovieList.map(movie => {
     return (
-      <MovieCard key={movie.id} id={movie.id} title={movie.title} posterPath={movie.poster_path} description={movie.overview} score={movie.vote_average} voteCount={movie.vote_count} />
+      <MovieCard key={movie.id} title={movie.title} posterPath={movie.poster_path} description={movie.overview} score={movie.vote_average} voteCount={movie.vote_count} />
     )
   })
 
