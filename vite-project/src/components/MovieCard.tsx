@@ -1,5 +1,3 @@
-import React from "react";
-
 type MovieCardProps = {
   id: number,
   title: string,
@@ -12,10 +10,10 @@ export default function MovieCard({id, title, posterUrl, description}: MovieCard
   return (
     <>
       <p>
-        {id}
-        {title}
-        {posterUrl}
-        {description}
+        <span>{id}</span>
+        <span>{title}</span>
+        <span>{posterUrl}</span>
+        <span>{description}</span>
       </p>
     </>
   )

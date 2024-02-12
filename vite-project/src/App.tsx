@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import MovieCard from './components/MovieCard.tsx'
+import MovieButton from './components/MovieButton.tsx'
 
 const movieDbApiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMGI5MTViYWI3M2JlZDdiYjA4YWU4Zjc5ZmNkNjc4OSIsInN1YiI6IjY1YzkzNjk0YTkzZDI1MDE2MzRjMDQ5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ez063EyqkKCF3RdU-yF8UvalOQECY6yaJ-uwSyaEme4'
 
@@ -14,7 +15,15 @@ type Movie = {
 
 function App() {
   const [page, setPage] = useState<number>(1);
-  const [movieResults, setMovieResults] = useState<Array<Movie>>([]);
+  const [movieResults, setMovieResults] = useState<Movie[]>([]);
+
+  const sortMovieResults = (movieResults: Movie[]) => {
+    const sorted = [...movieResults];
+    sorted.sort((a, b) => {
+      return a.id - b.id
+    });
+    setMovieResults(sorted);
+  }
 
   const fetchUpcomingMovies = useCallback(async (page: number) => {
     try {
@@ -24,7 +33,7 @@ function App() {
         })
       })
       const data = await response.json();
-      const results: Array<Movie> = data.results;
+      const results: Movie[] = data.results;
       
       setMovieResults(prevMovies => [...prevMovies, ...results])
     } catch (error) {
@@ -53,11 +62,8 @@ function App() {
         </a>
       </div>
       <h1>Movie App</h1>
-      <div className="card">
-        <button onClick={() => setPage(page + 1)}>
-          page is {page}
-        </button>
-      </div>
+      <MovieButton onClick={() => setPage(page + 1)} copy={`page is ${page}`} />
+      <MovieButton onClick={() => sortMovieResults(movieResults)} copy='sort movies by id' />
       {movieResultCards}
     </>
   )
