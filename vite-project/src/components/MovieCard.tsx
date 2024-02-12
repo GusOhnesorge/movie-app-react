@@ -1,20 +1,24 @@
+import MovieScore from "./MovieScore"
+
 type MovieCardProps = {
   id: number,
   title: string,
-  posterUrl?: string,
+  posterPath?: string,
   description?: string,
+  score?: number,
+  voteCount?: number,
 }
 
-export default function MovieCard({id, title, posterUrl, description}: MovieCardProps){
+export default function MovieCard({id, title, posterPath, description, score, voteCount}: MovieCardProps){
 
   return (
     <>
       <p>
-        <span>{id}</span>
-        <span>{title}</span>
-        <span>{posterUrl}</span>
-        <span>{description}</span>
+        <span><strong>{title}</strong></span>
       </p>
+      {posterPath && <img src={`https://image.tmdb.org/t/p/original/${posterPath}`} style={{height: '150px', width: '100px'}}></img>}
+      <p>{description}</p>
+      { score !== undefined && <MovieScore score={score} voteCount={voteCount} /> }
     </>
   )
 }
